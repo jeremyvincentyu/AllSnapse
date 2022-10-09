@@ -24,6 +24,8 @@ var disconnect_mode: bool = false
 var input_rounds = {}
 var neuron_rounds = {}
 var output_rounds = {}
+var activity_log = []
+var local_time:int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -230,6 +232,8 @@ func load_data(loaded_data: Dictionary):
 			connect_source_destination(neuron_database[neuron_id],destination_database[destination_id])	
 	
 func reset_simulation():
+	activity_log.clear()
+	local_time = 0
 	$Stepper.set_paused(false)
 	$Stepper.stop()
 	var databases = [input_database,neuron_database,output_database]
@@ -294,8 +298,11 @@ func single_step():
 	var collectors = [neuron_rounds,output_rounds]
 	for collector in collectors:
 		for neuron in collector:
-			collector[neuron].associated_thread.wait_to_finish()
-			
+			var single_log = collector[neuron].associated_thread.wait_to_finish()
+			if len(single_log) != 0:
+				var report_format = "At time {local_time}, {local_report}\n"
+				activity_log.append(report_format.format({"local_time":str(local_time),"local_report":single_log}))
+	
 	var evolution = false
 	#Check if Neural network has evolved at all.
 	for input_neuron in input_database:
@@ -312,7 +319,8 @@ func single_step():
 	#If not, stop the Stepper
 	if not evolution:
 		$Stepper.stop()
-		
+	local_time += 1
+	
 func single_step_serial():
 	#Execute Rules for Round
 	for input_neuron in input_database:
@@ -348,3 +356,9 @@ func single_step_serial():
 func pause_simulation():
 	$Stepper.set_paused(not $Stepper.is_paused())
 	return $Stepper.is_paused()
+
+func dump_log():
+	var string_log = ""
+	for every_line in activity_log:
+		string_log += every_line + "\n"
+	return string_log

@@ -204,3 +204,14 @@ func _on_Pause_pressed():
 	else:
 		$Indicator.color = Color(0,1,0,1)
 		$Pause.text = "Pause Simulation"
+
+
+func _on_ViewLog_pressed():
+	cache_scroll()
+	var neural_canvas = get_node("ScrollContainer/ViewportContainer/Viewport/NeuralCanvas")
+	$Log.set_text(neural_canvas.dump_log())
+	$Log.popup(Rect2(119,42,1128,587))
+
+
+func _on_Log_popup_hide():
+	restore_scroll()

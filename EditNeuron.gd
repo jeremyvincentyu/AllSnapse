@@ -6,6 +6,7 @@ extends Node2D
 # var b = "text"
 
 var RuleRowClass = load("res://RuleRow.tscn")
+var RegexRuleRowClass = load("res://RegexRuleRow.tscn")
 var operated_neuron
 
 # Called when the node enters the scene tree for the first time.
@@ -104,3 +105,8 @@ func preconfigure(source_neuron):
 			var new_rule_row = RuleRowClass.instance()
 			new_rule_row.load_rule(rule)
 			rule_box.add_child(new_rule_row)
+
+
+func _on_NewRegex_pressed():
+	var rule_box = get_node("ScrollRule/RuleBox")
+	rule_box.add_child(RegexRuleRowClass.instance())

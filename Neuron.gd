@@ -24,6 +24,7 @@ var RuleClass = load("res://Rule.tscn")
 var delay = 0;
 var delayed_rule;
 var target_position = Vector2(0,0);
+var neuron_log = ""
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var abbreviate_bool = {true:"T",false:"F"}
@@ -91,6 +92,8 @@ func evaluate_rules(_discard):
 					
 	if len(applicable)>0:
 		var chosen_rule = applicable[randi()%len(applicable)]
+		var neuron_format = "neuron {neuron_label}, with uid {unique_id}, having {spikes} spikes, committed to {some_rule}."
+		neuron_log = neuron_format.format({"neuron_label":neuron_label,"unique_id":str(unique_id),"some_rule":to_json(chosen_rule.save_data()),"spikes":str(spikes)})
 		spikes -= chosen_rule.consume
 		$Spike_Count.text = str(spikes)
 		if chosen_rule.delay>0:
@@ -105,11 +108,14 @@ func collect_spikes(_discard):
 	if delay >0:
 		refresh_display()
 		next_round_spikes = 0
-		return
-		
+		return ""
+	
 	spikes += next_round_spikes
 	next_round_spikes = 0
 	refresh_display()
+	var current_log = neuron_log
+	neuron_log = ""
+	return current_log
 	
 func add_spikes(new_spikes: int):
 	if delay>0:

@@ -57,18 +57,25 @@ margin_right = 434.0
 margin_bottom = 291.0
 text = "New Rule"
 
+[node name="NewRegex" type="Button" parent="."]
+margin_left = 220.0
+margin_top = 263.0
+margin_right = 334.0
+margin_bottom = 291.0
+text = "New Regex Rule"
+
 [node name="PrespikesLabel" type="Label" parent="."]
-margin_left = 22.0
+margin_left = 10.0
 margin_top = 268.0
-margin_right = 84.0
+margin_right = 76.0
 margin_bottom = 282.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Prespikes:"
 
 [node name="Prespikes" type="TextEdit" parent="."]
-margin_left = 95.0
+margin_left = 85.0
 margin_top = 265.0
-margin_right = 240.0
+margin_right = 115.0
 margin_bottom = 287.0
 text = "0"
 
@@ -210,6 +217,7 @@ autowrap = true
 
 [connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="NewRegex" to="." method="_on_NewRegex_pressed"]
 [connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]
 [connection signal="pressed" from="InvalidError/Ok" to="InvalidError/Ok" method="_on_Button_pressed"]
 [connection signal="pressed" from="UnfilledError/Ok" to="UnfilledError/Ok" method="_on_Ok_pressed"]

@@ -14,6 +14,7 @@ var neuron_type = 2;
 var SynapseClass = load("res://Synapse.tscn");
 var collector_lock = Mutex.new()
 var target_position = Vector2(0,0)
+var neuron_log = ""
 signal select_neuron;
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,7 +35,12 @@ func reset_simulation():
 	
 func collect_spikes(_discard):
 	$History.text += str(current_state)
+	var report = ""
+	if current_state > 0:
+		var neuron_format = "Output neuron {neuron_label}, with uid {unique_id}, received {current_state} spikes."
+		report = neuron_format.format({"neuron_label":neuron_label,"unique_id":str(unique_id),"current_state":str(current_state)})
 	current_state = 0
+	return report
 
 func add_spikes(new_spikes: int):
 	collector_lock.lock()
