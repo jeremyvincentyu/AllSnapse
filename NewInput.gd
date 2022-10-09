@@ -22,7 +22,7 @@ func _on_Save_pressed():
 	var spiketrain = $SpikeTrain.text
 	var x = float($x.text)
 	var y = float($y.text)
-	if not (x>=0.0 and x<=5000.0) or not (y>=0.0 and y<=5000.0):
+	if not (x>=0.0 and x<=5000.0) or not (y>=0.0 and y<=525.0):
 		$InvalidCoordinatePopup.popup(Rect2(150,80,300,180))
 		return
 	var sample_split = spiketrain.split(",")

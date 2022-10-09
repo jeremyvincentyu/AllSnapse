@@ -17,4 +17,5 @@ func _ready():
 
 
 func _on_About_pressed():
+	get_parent().cache_scroll()
 	$Popup.popup_centered()

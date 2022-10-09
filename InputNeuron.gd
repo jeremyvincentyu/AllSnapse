@@ -96,7 +96,7 @@ func target(x,y):
 	var current_position = get_position()
 	if abs(current_position.x - x) < 1 and abs(current_position.y-y) < 1:
 			return 
-	set_position(Vector2(1000,1000))
+	set_position(Vector2(1000,525))
 	target_position = Vector2(x,y)
 	
 func add_destination(destination_id:int,destination_pointer,graphics_pointer):

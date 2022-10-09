@@ -5,7 +5,6 @@ extends Node2D
 # var a = 2
 # var b = "text"
 var cached_hscroll: int;
-var cached_vscroll: int;
 var ongoing_simulation = false;
 
 # Called when the node enters the scene tree for the first time.
@@ -52,13 +51,10 @@ func _on_Output_pressed():
 	
 func cache_scroll():
 	cached_hscroll= $ScrollContainer.get_h_scroll()
-	cached_vscroll = $ScrollContainer.get_v_scroll()
 	$ScrollContainer.set_h_scroll(7000)
-	$ScrollContainer.set_v_scroll(7000)
 	
 func restore_scroll():
 	$ScrollContainer.set_h_scroll(cached_hscroll)
-	$ScrollContainer.set_v_scroll(cached_vscroll)
 
 
 func config_input(source_neuron):
@@ -214,4 +210,8 @@ func _on_ViewLog_pressed():
 
 
 func _on_Log_popup_hide():
+	restore_scroll()
+
+
+func _on_Popup_popup_hide():
 	restore_scroll()

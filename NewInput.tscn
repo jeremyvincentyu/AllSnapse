@@ -109,7 +109,7 @@ margin_bottom = 109.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Invalid Coordinates!
 
-Enter a number between 0 and 5000."
+Enter a number between 0 and 5000 for x, and a number between 0 and 525 for y."
 autowrap = true
 
 [node name="InvalidSpikeTrainPopup" type="Popup" parent="."]
