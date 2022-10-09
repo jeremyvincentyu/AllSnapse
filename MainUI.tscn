@@ -21,10 +21,10 @@ margin_bottom = 720.0
 color = Color( 0.584314, 0.247059, 0.690196, 1 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-margin_left = 120.0
+margin_left = 220.0
 margin_top = 40.0
 margin_right = 1256.0
-margin_bottom = 643.0
+margin_bottom = 593.0
 follow_focus = true
 
 [node name="ViewportContainer" type="ViewportContainer" parent="ScrollContainer"]
