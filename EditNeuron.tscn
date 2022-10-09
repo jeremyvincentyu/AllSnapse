@@ -1,0 +1,215 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://EditNeuron.gd" type="Script" id=1]
+[ext_resource path="res://Button.gd" type="Script" id=2]
+[ext_resource path="res://Ok.gd" type="Script" id=3]
+
+[node name="EditNeuron" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 650.0
+margin_bottom = 301.0
+color = Color( 0.054902, 0.694118, 0.890196, 1 )
+
+[node name="NameLabel" type="Label" parent="."]
+margin_left = 15.0
+margin_top = 19.0
+margin_right = 104.0
+margin_bottom = 33.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Neuron Label:"
+
+[node name="Name" type="TextEdit" parent="."]
+margin_left = 115.0
+margin_top = 12.0
+margin_right = 635.0
+margin_bottom = 41.0
+
+[node name="Save" type="Button" parent="."]
+margin_left = 447.0
+margin_top = 263.0
+margin_right = 540.0
+margin_bottom = 291.0
+text = "Save"
+
+[node name="Rules" type="Label" parent="."]
+margin_left = 14.0
+margin_top = 79.0
+margin_right = 54.0
+margin_bottom = 93.0
+rect_scale = Vector2( 1.5, 1.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Rules:"
+
+[node name="ScrollRule" type="ScrollContainer" parent="."]
+margin_left = 100.0
+margin_top = 81.0
+margin_right = 630.0
+margin_bottom = 235.0
+
+[node name="RuleBox" type="VBoxContainer" parent="ScrollRule"]
+
+[node name="New" type="Button" parent="."]
+margin_left = 341.0
+margin_top = 263.0
+margin_right = 434.0
+margin_bottom = 291.0
+text = "New Rule"
+
+[node name="PrespikesLabel" type="Label" parent="."]
+margin_left = 22.0
+margin_top = 268.0
+margin_right = 84.0
+margin_bottom = 282.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Prespikes:"
+
+[node name="Prespikes" type="TextEdit" parent="."]
+margin_left = 95.0
+margin_top = 265.0
+margin_right = 240.0
+margin_bottom = 287.0
+text = "0"
+
+[node name="xcoordinate" type="Label" parent="."]
+margin_left = 15.0
+margin_top = 49.0
+margin_right = 32.0
+margin_bottom = 66.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "x:"
+
+[node name="x" type="TextEdit" parent="."]
+margin_left = 35.0
+margin_top = 48.0
+margin_right = 104.0
+margin_bottom = 78.0
+text = "0"
+
+[node name="ycoordinate" type="Label" parent="."]
+margin_left = 141.0
+margin_top = 50.0
+margin_right = 181.0
+margin_bottom = 64.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "y:"
+
+[node name="y" type="TextEdit" parent="."]
+margin_left = 162.0
+margin_top = 48.0
+margin_right = 231.0
+margin_bottom = 78.0
+text = "0"
+
+[node name="Cancel" type="Button" parent="."]
+margin_left = 549.0
+margin_top = 263.0
+margin_right = 641.0
+margin_bottom = 292.0
+text = "Cancel"
+
+[node name="InvalidError" type="Popup" parent="."]
+margin_left = 104.0
+margin_top = 62.0
+margin_right = 558.0
+margin_bottom = 212.0
+
+[node name="ColorRect" type="ColorRect" parent="InvalidError"]
+margin_right = 454.0
+margin_bottom = 150.0
+color = Color( 0.878431, 0.564706, 0.121569, 1 )
+
+[node name="Message" type="Label" parent="InvalidError"]
+margin_top = 41.0
+margin_right = 450.0
+margin_bottom = 89.0
+text = "Error! Invalid Rule detected!
+Please check that for all rules, consume is at most trigger, and release is at most consume"
+autowrap = true
+
+[node name="Ok" type="Button" parent="InvalidError"]
+margin_left = 218.0
+margin_top = 108.0
+margin_right = 248.0
+margin_bottom = 128.0
+text = "Ok"
+script = ExtResource( 2 )
+
+[node name="UnfilledError" type="Popup" parent="."]
+margin_left = 130.0
+margin_top = 62.0
+margin_right = 549.0
+margin_bottom = 219.0
+
+[node name="ColorRect" type="ColorRect" parent="UnfilledError"]
+margin_right = 419.0
+margin_bottom = 157.0
+color = Color( 0.878431, 0.564706, 0.121569, 1 )
+
+[node name="Message" type="Label" parent="UnfilledError"]
+margin_left = 32.0
+margin_top = 22.0
+margin_right = 372.0
+margin_bottom = 74.0
+text = "Make sure you have totally filled in every rule you added. If you cannot, delete unused rules by pressing the red x of the unused rule."
+autowrap = true
+
+[node name="Ok" type="Button" parent="UnfilledError"]
+margin_left = 188.0
+margin_top = 96.0
+margin_right = 250.0
+margin_bottom = 123.0
+text = "Ok"
+script = ExtResource( 3 )
+
+[node name="InvalidCoordinatePopup" type="Popup" parent="."]
+margin_left = 150.0
+margin_top = 80.0
+margin_right = 450.0
+margin_bottom = 260.0
+
+[node name="bg" type="ColorRect" parent="InvalidCoordinatePopup"]
+margin_right = 300.0
+margin_bottom = 180.0
+color = Color( 0.921569, 0.694118, 0.152941, 1 )
+
+[node name="message" type="Label" parent="InvalidCoordinatePopup"]
+margin_left = 26.0
+margin_top = 32.0
+margin_right = 264.0
+margin_bottom = 109.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Invalid Coordinates!
+
+Enter a number between 0 and 5000."
+autowrap = true
+
+[node name="InvalidSpikesPopup" type="Popup" parent="."]
+margin_left = 150.0
+margin_top = 80.0
+margin_right = 450.0
+margin_bottom = 260.0
+
+[node name="bg" type="ColorRect" parent="InvalidSpikesPopup"]
+margin_right = 300.0
+margin_bottom = 180.0
+color = Color( 0.921569, 0.694118, 0.152941, 1 )
+
+[node name="message" type="Label" parent="InvalidSpikesPopup"]
+margin_left = 26.0
+margin_top = 32.0
+margin_right = 264.0
+margin_bottom = 109.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Invalid Spikes!
+
+Spikes must be nonnegative.
+"
+autowrap = true
+
+[connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="InvalidError/Ok" to="InvalidError/Ok" method="_on_Button_pressed"]
+[connection signal="pressed" from="UnfilledError/Ok" to="UnfilledError/Ok" method="_on_Ok_pressed"]
