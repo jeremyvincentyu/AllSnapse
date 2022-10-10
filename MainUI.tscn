@@ -151,9 +151,9 @@ text = "Connect"
 
 [node name="Reset" type="Button" parent="."]
 margin_left = 49.0
-margin_top = 685.0
+margin_top = 688.0
 margin_right = 172.0
-margin_bottom = 708.0
+margin_bottom = 711.0
 text = "Reset Simulation"
 
 [node name="Input" type="Button" parent="."]
