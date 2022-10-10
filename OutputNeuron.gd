@@ -43,6 +43,7 @@ func collect_spikes(_discard):
 	return report
 
 func add_spikes(new_spikes: int):
+	#print("Output neuron add spikes triggered")
 	collector_lock.lock()
 	current_state += new_spikes
 	collector_lock.unlock()

@@ -74,6 +74,7 @@ func evaluate_rules(_discard):
 	if delay > 0:
 		delay -= 1
 		if delay == 0:
+			#print("Neuron activated on next round")
 			activate_neuron()
 			for neuron in downstream:
 				downstream[neuron].linked_neuron.add_spikes(delayed_rule.release)
@@ -97,6 +98,7 @@ func evaluate_rules(_discard):
 		spikes -= chosen_rule.consume
 		$Spike_Count.text = str(spikes)
 		if chosen_rule.delay>0:
+			#print("Rule deferred, should not activate")
 			delayed_rule = chosen_rule
 			delay = delayed_rule.delay
 			return
@@ -108,7 +110,9 @@ func collect_spikes(_discard):
 	if delay >0:
 		refresh_display()
 		next_round_spikes = 0
-		return ""
+		var current_log = neuron_log
+		neuron_log = ""
+		return current_log
 	
 	spikes += next_round_spikes
 	next_round_spikes = 0

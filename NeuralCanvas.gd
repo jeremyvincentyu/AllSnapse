@@ -268,6 +268,7 @@ func start_simulation(step_time: float):
 	single_step()
 
 func single_step():
+	#return single_step_serial()
 	#Execute Rules for Round
 	for input_neuron in input_database:
 		input_rounds[input_neuron].associated_thread = Thread.new()
@@ -319,9 +320,11 @@ func single_step():
 	#If not, stop the Stepper
 	if not evolution:
 		$Stepper.stop()
+		
 	local_time += 1
 	
 func single_step_serial():
+	print("Local Time is Now: ",local_time)
 	#Execute Rules for Round
 	for input_neuron in input_database:
 		input_rounds[input_neuron].old_cursor = input_database[input_neuron].cursor
@@ -331,14 +334,17 @@ func single_step_serial():
 		neuron_rounds[neuron].old_spikes = neuron_database[neuron].spikes
 		neuron_database[neuron].evaluate_rules(0)
 	
-	#Update Spikes in accordance with Round Results
-	for neuron in neuron_database:
-		neuron_database[neuron].collect_spikes(0)
-		
-	for output_neuron in output_database:
-		output_database[output_neuron].collect_spikes(0)
 	
-			
+	
+	#Wait for Spike Collection to Finish
+	var collectors = [neuron_database,output_database]
+	for collector in collectors:
+		for neuron in collector:
+			var single_log = collector[neuron].collect_spikes(0)
+			if len(single_log) != 0:
+				var report_format = "At time {local_time}, {local_report}\n"
+				activity_log.append(report_format.format({"local_time":str(local_time),"local_report":single_log}))
+	
 	var evolution = false
 	#Check if Neural network has evolved at all.
 	for input_neuron in input_database:
@@ -347,11 +353,16 @@ func single_step_serial():
 	
 	for neuron in neuron_database:
 		var spike_evolution = neuron_database[neuron].spikes != neuron_rounds[neuron].old_spikes
+		if neuron_database[neuron].delay>0:
+			evolution = true
+			break
 		evolution = evolution or spike_evolution 
 	
 	#If not, stop the Stepper
-	if not evolution:
-		$Stepper.stop()
+	#if not evolution:
+	#	$Stepper.stop()
+		
+	local_time += 1
 
 func pause_simulation():
 	$Stepper.set_paused(not $Stepper.is_paused())
